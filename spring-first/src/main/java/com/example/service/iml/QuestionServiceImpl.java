@@ -1,9 +1,13 @@
-package service.iml;
+package com.example.service.iml;
 
-import model.Answer;
-import model.Question;
-import service.CsvDataloader;
-import service.QuestionService;
+import lombok.RequiredArgsConstructor;
+import com.example.model.Answer;
+import com.example.model.Question;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Service;
+import com.example.service.CsvDataloader;
+import com.example.service.QuestionService;
 
 import javax.annotation.PostConstruct;
 import java.util.HashSet;
@@ -11,14 +15,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@PropertySource("classpath:application.properties")
+@RequiredArgsConstructor
+@Service
 public class QuestionServiceImpl implements QuestionService {
     private Set<Question> questions = new HashSet<>();
     private final CsvDataloader csvDataLoader;
-    public static final String QUESTIONS_CSV = "questions.csv";
-
-    public QuestionServiceImpl(CsvDataloader csvDataLoader) {
-        this.csvDataLoader = csvDataLoader;
-    }
+    @Value( "${csv.questions}")
+    public String QUESTIONS_CSV;
 
     @PostConstruct
     public void setUp() {

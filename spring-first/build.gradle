@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "io.franzbecker.gradle-lombok" version "5.0.0"
 }
 
 group 'org.example'
@@ -22,6 +23,7 @@ dependencies {
 
 //    lombok
     compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
 //    logger
     implementation 'log4j:log4j:1.2.17'

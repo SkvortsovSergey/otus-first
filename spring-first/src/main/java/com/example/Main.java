@@ -1,9 +1,12 @@
-import configuration.CsvConfig;
+package com.example;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import service.QuestionService;
-
-@ComponentScan(basePackageClasses = CsvConfig.class)
+import org.springframework.context.annotation.Configuration;
+import com.example.service.CsvDataloader;
+import com.example.service.QuestionService;
+@ComponentScan(basePackages = "com.example.*")
+@Configuration
 public class Main {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
