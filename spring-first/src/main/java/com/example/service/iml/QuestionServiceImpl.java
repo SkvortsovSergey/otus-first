@@ -6,7 +6,7 @@ import com.example.model.Question;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-import com.example.service.CsvDataloader;
+import com.example.service.CsvDataLoader;
 import com.example.service.QuestionService;
 
 import javax.annotation.PostConstruct;
@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 @Service
 public class QuestionServiceImpl implements QuestionService {
     private Set<Question> questions = new HashSet<>();
-    private final CsvDataloader csvDataLoader;
-    @Value( "${csv.questions}")
+    private final CsvDataLoader csvDataLoader;
+    @Value("${csv.questions}")
     public String QUESTIONS_CSV;
 
     @PostConstruct
