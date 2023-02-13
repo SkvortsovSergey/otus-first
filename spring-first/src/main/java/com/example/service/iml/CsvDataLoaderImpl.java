@@ -1,5 +1,6 @@
-package service.iml;
+package com.example.service.iml;
 
+import com.example.service.CsvDataLoader;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
@@ -7,14 +8,14 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import org.apache.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-import service.CsvDataloader;
 
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-public class CsvDataloaderImpl implements CsvDataloader {
-    Logger logger = Logger.getLogger(CsvDataloaderImpl.class);
+@Service
+public class CsvDataLoaderImpl implements CsvDataLoader {
+    Logger logger = Logger.getLogger(CsvDataLoaderImpl.class);
 
     @Override
     public <T> List<T> loadObjectList(Class<T> type, String fileName) {
