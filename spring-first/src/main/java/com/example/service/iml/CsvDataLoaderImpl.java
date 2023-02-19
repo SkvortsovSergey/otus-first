@@ -1,11 +1,13 @@
 package com.example.service.iml;
 
+import com.example.logging.LoggerAround;
 import com.example.service.CsvDataLoader;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import org.apache.log4j.Logger;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 @Service
+@Slf4j
 public class CsvDataLoaderImpl implements CsvDataLoader {
-    Logger logger = Logger.getLogger(CsvDataLoaderImpl.class);
 
     @Override
+    @LoggerAround
     public <T> List<T> loadObjectList(Class<T> type, String fileName) {
         try {
             CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader();
@@ -27,11 +30,11 @@ public class CsvDataLoaderImpl implements CsvDataLoader {
                     mapper.readerFor(type).with(bootstrapSchema).readValues(resourceAsStream);
             return readValues.readAll();
         } catch (Exception e) {
-            logger.error("Error occurred while loading object list from file " + fileName, e);
+            log.error("Error occurred while loading object list from file " + fileName, e);
             return Collections.emptyList();
         }
     }
-
+    @LoggerAround
     @Override
     public List<String[]> loadManyToManyRelationship(String fileName) {
         try {
@@ -43,8 +46,7 @@ public class CsvDataLoaderImpl implements CsvDataLoader {
                     mapper.readerFor(String[].class).with(bootstrapSchema).readValues(resourceAsStream);
             return readValues.readAll();
         } catch (Exception e) {
-            logger.error(
-                    "Error occurred while loading many to many relationship from file = " + fileName, e);
+            log.error("Error occurred while loading many to many relationship from file = " + fileName, e);
             return Collections.emptyList();
         }
     }
