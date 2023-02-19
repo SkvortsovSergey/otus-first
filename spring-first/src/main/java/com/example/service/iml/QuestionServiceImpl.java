@@ -1,5 +1,6 @@
 package com.example.service.iml;
 
+import com.example.logging.LoggerAround;
 import lombok.RequiredArgsConstructor;
 import com.example.model.Answer;
 import com.example.model.Question;
@@ -30,6 +31,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    @LoggerAround
     public Set<Question> getQuestions() {
         return this.questions;
     }
